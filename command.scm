@@ -1,7 +1,12 @@
 (module markdown-svnwiki-command ()
 
-(import chicken scheme irregex)
-(use files markdown-svnwiki srfi-37)
+(import (chicken base)
+        (chicken irregex)
+        (chicken pathname)
+        (chicken process-context)
+        (markdown-svnwiki)
+        (scheme)
+        (srfi 37))
 
 (define (help option name arg seed)
   (print

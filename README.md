@@ -1,12 +1,12 @@
 # markdown-svnwiki
-Converts Markdown to the svnwiki syntax used on the [Chicken wiki](https://wiki.call-cc.org/edit-help). It uses [lowdown](http://wiki.call-cc.org/eggref/4/lowdown) to transform Markdown into SXML before transforming it into svnwiki with [sxml-transforms](http://wiki.call-cc.org/eggref/4/sxml-transforms). Much credit goes to those two libraries, particularly lowdown which heavily influenced the code in markdown-svnwiki.
+Converts Markdown to the svnwiki syntax used on the [Chicken wiki](https://wiki.call-cc.org/edit-help). It uses [lowdown](http://wiki.call-cc.org/eggref/5/lowdown) to transform Markdown into SXML before transforming it into svnwiki with [sxml-transforms](http://wiki.call-cc.org/eggref/5/sxml-transforms). Much credit goes to those two libraries, particularly lowdown which heavily influenced the code in markdown-svnwiki.
 
 markdown-svnwiki includes pre and post-processing phases for performing customizable transformations on the input and output. Some transformations, meant to make working with the Chicken wiki more convenient, are included by default. They are described in the section [Special Syntax](#special-syntax).
 
 ## Installation
 This repository is a [Chicken Scheme](http://call-cc.org/) egg.
 
-It is part of the [Chicken egg index](http://wiki.call-cc.org/chicken-projects/egg-index-4.html) and can be installed with `chicken-install markdown-svnwiki`.
+It is part of the [Chicken egg index](http://wiki.call-cc.org/chicken-projects/egg-index-5.html) and can be installed with `chicken-install markdown-svnwiki`.
 
 ## Requirements
 * lowdown
@@ -67,8 +67,8 @@ Becomes:
 This example can be compiled to make a command line program that accepts one argument - a Markdown file - and outputs a svnwiki file into the same directory. It shows the addition of of a pre-processing step - one that removes the first section called "Installation" (fairly indiscriminately, it stops at the first `#`).
 
 ``` Scheme
-(import chicken scheme irregex)
-(use markdown-svnwiki)
+(import (chicken irregex) (chicken pathname) (chicken process-context))
+(import (markdown-svnwiki))
 
 (define file-name (cadr (argv)))
 (define output-name (pathname-replace-extension file-name "svnwiki"))

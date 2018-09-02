@@ -4,8 +4,16 @@
    post-processing
    toc)
 
-(import chicken scheme files irregex data-structures srfi-1 ports extras srfi-13)
-(use lowdown sxml-transforms miscmacros)
+(import (chicken base)
+        (chicken io)
+        (chicken irregex)
+        (chicken port)
+        (lowdown)
+        (miscmacros)
+        (scheme)
+        (srfi 1)
+        (srfi 13)
+        (sxml-transforms))
 
 (define references (make-parameter #f))
 
@@ -147,7 +155,8 @@
           (loop ((cdar processing) str)
                 (cdr processing)))))
   (let* ([input (if (port? input)
-                    (read-string #f input)
+                    (let ((s (read-string #f input)))
+                      (if (eof-object? s) "" s))
                     input)]
          [string (process (pre-processing) input)])
     (receive (refs sxml) (partition reference-element? (markdown->sxml* string))

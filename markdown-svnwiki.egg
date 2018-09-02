@@ -1,0 +1,10 @@
+;; markdown-svnwiki.egg -*- scheme -*-
+
+((synopsis "Convert Markdown to svnwiki")
+ (author "Alex Charlton")
+ (category doc-tools)
+ (license "BSD")
+ (dependencies lowdown miscmacros srfi-1 srfi-13 srfi-37 sxml-transforms)
+ (components
+  (extension markdown-svnwiki)
+  (program command (install-name "markdown-svnwiki"))))
